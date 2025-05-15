@@ -27,6 +27,7 @@ namespace LibrarySystem.DataAccessLayer.Persistence
                 entity.Property(b=>b.Title).IsRequired().HasMaxLength(200);
                 entity.Property(b=>b.Author).IsRequired().HasMaxLength(100);
                 entity.Property(b=>b.Isbn).IsRequired();
+                entity.HasIndex(b=>b.Isbn).IsUnique();
                 entity.Property(b => b.Genre).HasConversion<string>();
             });
 
