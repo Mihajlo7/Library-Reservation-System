@@ -14,5 +14,7 @@ namespace LibrarySystem.Entities.Models
         public int PublishedYear { get; set; }
         public string Isbn { get; set; } = null!;
         public BookGenre Genre { get; set; } = BookGenre.None;
+
+        public ICollection<Author> Authors { get; set; } = [];
     }
 }

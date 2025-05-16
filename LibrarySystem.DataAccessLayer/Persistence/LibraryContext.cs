@@ -13,6 +13,7 @@ namespace LibrarySystem.DataAccessLayer.Persistence
     public sealed class LibraryContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         { }
 
@@ -29,6 +30,16 @@ namespace LibrarySystem.DataAccessLayer.Persistence
                 entity.Property(b=>b.Isbn).IsRequired();
                 entity.HasIndex(b=>b.Isbn).IsUnique();
                 entity.Property(b => b.Genre).HasConversion<string>();
+            });
+
+            // Author
+            modelBuilder.Entity<Author>(entity =>
+            {
+                entity.HasKey(a => a.Id);
+                entity.HasIndex(a => a.Code).IsUnique();
+                entity.HasMany(a => a.Books)
+                .WithMany(a => a.Authors)
+                .UsingEntity("AuthorBook");
             });
 
         }
