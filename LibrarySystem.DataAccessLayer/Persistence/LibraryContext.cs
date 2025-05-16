@@ -43,6 +43,7 @@ namespace LibrarySystem.DataAccessLayer.Persistence
                 // If operation is insert
                 if(entity.State == EntityState.Added)
                 {
+                    entity.Entity.Id = Guid.NewGuid();
                     entity.Entity.CreatedAt = DateTime.UtcNow;
                     entity.Entity.UpdatedAt = DateTime.UtcNow;
                 }
